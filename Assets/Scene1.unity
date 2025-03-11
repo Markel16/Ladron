@@ -3553,7 +3553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuPanel: {fileID: 627109035}
   optionsPanel: {fileID: 547917904}
-  exitConfirmPanel: {fileID: 0}
+  exitConfirmPanel: {fileID: 689260109}
 --- !u!4 &1116773620
 Transform:
   m_ObjectHideFlags: 0
@@ -5375,6 +5375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33dbc0ff78779794cb1aeb99d71703b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupSound: {fileID: 0}
 --- !u!1 &1901967061
 GameObject:
   m_ObjectHideFlags: 0
