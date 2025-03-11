@@ -1,10 +1,17 @@
 using UnityEngine;
+using UnityEngine.AI; // Asegúrate de importar esto si usas NavMesh
 
 public class EnemyVision : MonoBehaviour
 {
     public float visionRange = 10f; // Distancia de visión
     public float visionAngle = 45f; // Ángulo del cono de visión
     public Transform player; // Referencia al jugador
+    private NavMeshAgent agent; // Para moverse hacia el jugador
+
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>(); // Obtener el NavMeshAgent
+    }
 
     void Update()
     {
@@ -24,11 +31,16 @@ public class EnemyVision : MonoBehaviour
                 {
                     if (hit.collider.CompareTag("Player"))
                     {
-                        Debug.Log("¡Jugador detectado!");
+                        Debug.Log("¡Jugador detectado! Persiguiéndolo...");
+                        agent.SetDestination(player.position); // El enemigo se mueve hacia el jugador
+
+                        // Reproducir sonido de alerta
+                        GetComponent<EnemySound>().PlayAlertSound();
                     }
                 }
             }
         }
     }
 }
+
 
