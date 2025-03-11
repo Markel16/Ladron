@@ -23,6 +23,9 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        audioSource.Play(); // Reproducir la música al inicio
+        if (!audioSource.isPlaying)
+        {
+            audioSource.Play(); // Reproducir la música al inicio
+        }
     }
 }
