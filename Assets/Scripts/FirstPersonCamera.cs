@@ -1,29 +1,36 @@
 using UnityEngine;
 
-public class FirstPersonCamera : MonoBehaviour
+public class FirstPersonMovement : MonoBehaviour
 {
-    public float mouseSensitivity = 200f; // Sensibilidad del mouse
-    public Transform playerBody; // Referencia al cuerpo del jugador
-
-    private float xRotation = 0f; // Para controlar la rotación vertical
+    public float walkSpeed = 3f; // Velocidad normal
+    public float sprintSpeed = 6f; // Velocidad al correr
+    private float currentSpeed; // Velocidad actual
+    private CharacterController controller;
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; // Ocultar y bloquear el cursor en el centro
+        controller = GetComponent<CharacterController>();
+        currentSpeed = walkSpeed; // Empezar con velocidad normal
     }
 
     void Update()
     {
-        // Capturar movimiento del mouse
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        // Detectar si el jugador presiona Shift para correr
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            currentSpeed = sprintSpeed; // Duplicar velocidad
+        }
+        else
+        {
+            currentSpeed = walkSpeed; // Volver a velocidad normal
+        }
 
-        // Rotar la cámara en el eje X (mirar arriba/abajo)
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Limitar para evitar giro completo
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        // Obtener entrada de movimiento (WASD)
+        float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical");
 
-        // Rotar el cuerpo del jugador en el eje Y (girar a los lados)
-        playerBody.Rotate(Vector3.up * mouseX);
+        // Aplicar movimiento en función de la velocidad actual
+        Vector3 move = transform.right * moveX + transform.forward * moveZ;
+        controller.Move(move * currentSpeed * Time.deltaTime);
     }
 }
