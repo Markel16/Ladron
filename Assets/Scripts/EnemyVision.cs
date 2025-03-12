@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.AI; // Asegúrate de importar esto si usas NavMesh
+using UnityEngine.AI; // Para el NavMeshAgent
 
 public class EnemyVision : MonoBehaviour
 {
@@ -40,7 +40,12 @@ public class EnemyVision : MonoBehaviour
                 }
             }
         }
+
+        //Si el enemigo alcanza al jugador, activa el Game Over
+        if (Vector3.Distance(transform.position, player.position) < 1.5f) // Distancia para atrapar al jugador
+        {
+            Debug.Log("¡El enemigo te atrapó! Has perdido.");
+            GameOverManager.instance.ShowGameOver();
+        }
     }
 }
-
-
