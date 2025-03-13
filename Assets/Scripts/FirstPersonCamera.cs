@@ -6,6 +6,7 @@ public class FirstPersonMovement : MonoBehaviour
     public float sprintSpeed = 6f; // Velocidad al correr
     private float currentSpeed; // Velocidad actual
     private CharacterController controller;
+    public float mouseSensitivity = 200f;
 
     void Start()
     {
