@@ -10,10 +10,16 @@ public class EnemyVision : MonoBehaviour
     public Transform[] patrolPoints; // Puntos de patrulla
     private int currentPatrolIndex = 0;
     private bool isChasing = false;
+    public float patrolSpeed = 2f; // Velocidad cuando patrulla
+    public float chaseSpeed = 5f; // Velocidad cuando persigue al jugador
+    public float chaseTime = 5f; // Tiempo que busca al jugador antes de volver a patrullar
+    private float chaseTimer = 0f; // Contador para la persecución
+
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = patrolSpeed;
         PatrolToNextPoint(); // Empezar la patrulla
     }
 
@@ -58,11 +64,27 @@ public class EnemyVision : MonoBehaviour
                     {
                         Debug.Log("¡Jugador detectado! Persiguiéndolo...");
                         isChasing = true;
+                        agent.speed = chaseSpeed; // Cambia la velocidad al modo persecución
                         agent.SetDestination(player.position);
                         GetComponent<EnemySound>().PlayAlertSound();
+                        chaseTimer = chaseTime; // Reinicia el tiempo de persecución
                     }
                 }
             }
         }
+
+        // Si está persiguiendo pero pierde de vista al jugador
+        if (isChasing)
+        {
+            chaseTimer -= Time.deltaTime;
+            if (chaseTimer <= 0f)
+            {
+                Debug.Log("Jugador perdido. Volviendo a patrullar.");
+                isChasing = false;
+                agent.speed = patrolSpeed; // Vuelve a la velocidad de patrulla
+                PatrolToNextPoint(); // Reinicia la patrulla
+            }
+        }
     }
+
 }
