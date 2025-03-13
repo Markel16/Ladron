@@ -1,51 +1,68 @@
 using UnityEngine;
-using UnityEngine.AI; // Para el NavMeshAgent
+using UnityEngine.AI;
 
 public class EnemyVision : MonoBehaviour
 {
     public float visionRange = 10f; // Distancia de visión
     public float visionAngle = 45f; // Ángulo del cono de visión
     public Transform player; // Referencia al jugador
-    private NavMeshAgent agent; // Para moverse hacia el jugador
+    private NavMeshAgent agent; // Para moverse
+    public Transform[] patrolPoints; // Puntos de patrulla
+    private int currentPatrolIndex = 0;
+    private bool isChasing = false;
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>(); // Obtener el NavMeshAgent
+        agent = GetComponent<NavMeshAgent>();
+        PatrolToNextPoint(); // Empezar la patrulla
     }
 
     void Update()
     {
-        // Calcular dirección hacia el jugador
+        if (!isChasing)
+        {
+            // Si llega al destino, ir al siguiente punto
+            if (!agent.pathPending && agent.remainingDistance < 0.5f)
+            {
+                PatrolToNextPoint();
+            }
+        }
+
+        DetectPlayer(); // Comprobar si el jugador está en rango
+    }
+
+    void PatrolToNextPoint()
+    {
+        if (patrolPoints.Length == 0) return;
+
+        // Mover al siguiente punto de patrulla
+        agent.SetDestination(patrolPoints[currentPatrolIndex].position);
+
+        // Cambiar al siguiente punto de la lista
+        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+    }
+
+    void DetectPlayer()
+    {
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
 
-        // Comprobar si el jugador está dentro del rango
         if (Vector3.Distance(transform.position, player.position) < visionRange)
         {
-            // Comprobar si el jugador está dentro del ángulo de visión
             float angle = Vector3.Angle(transform.forward, directionToPlayer);
             if (angle < visionAngle)
             {
-                // Lanzar un Raycast para asegurarse de que no hay obstáculos en el camino
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, directionToPlayer, out hit, visionRange))
                 {
                     if (hit.collider.CompareTag("Player"))
                     {
                         Debug.Log("¡Jugador detectado! Persiguiéndolo...");
-                        agent.SetDestination(player.position); // El enemigo se mueve hacia el jugador
-
-                        // Reproducir sonido de alerta
+                        isChasing = true;
+                        agent.SetDestination(player.position);
                         GetComponent<EnemySound>().PlayAlertSound();
                     }
                 }
             }
-        }
-
-        //Si el enemigo alcanza al jugador, activa el Game Over
-        if (Vector3.Distance(transform.position, player.position) < 1.5f) // Distancia para atrapar al jugador
-        {
-            Debug.Log("¡El enemigo te atrapó! Has perdido.");
-            GameOverManager.instance.ShowGameOver();
         }
     }
 }
