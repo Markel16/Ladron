@@ -6,7 +6,7 @@ public class OptionsMenu : MonoBehaviour
     public Slider mouseSensitivitySlider;
     public Slider volumeSlider;
     public Slider brightnessSlider;
-    public FirstPersonCamera playerCamera;
+    public FirstPersonMovement playerMovement; // Asegúrate de usar el script correcto
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class OptionsMenu : MonoBehaviour
     public void ApplySettings()
     {
         // Ajustar sensibilidad del ratón
-        playerCamera.mouseSensitivity = mouseSensitivitySlider.value;
+        playerMovement.mouseSensitivity = mouseSensitivitySlider.value; // Usamos la referencia correcta
         PlayerPrefs.SetFloat("MouseSensitivity", mouseSensitivitySlider.value);
 
         // Ajustar volumen
