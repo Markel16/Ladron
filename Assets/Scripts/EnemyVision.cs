@@ -86,5 +86,14 @@ public class EnemyVision : MonoBehaviour
             }
         }
     }
+    public void InvestigatePoint(Vector3 point)
+    {
+        if (!isChasing) // Solo investigar si no está persiguiendo al jugador
+        {
+            Debug.Log("El enemigo ha oído un ruido. Investigando...");
+            agent.SetDestination(point);
+        }
+    }
+
 
 }
