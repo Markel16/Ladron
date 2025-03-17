@@ -9,9 +9,10 @@ public class Distraction : MonoBehaviour
             EnemyVision enemyVision = other.GetComponent<EnemyVision>();
             if (enemyVision != null)
             {
-                enemyVision.InvestigatePoint(transform.position);
+                enemyVision.Distract(transform.position); // Llamar al nuevo método de distracción
             }
-            Destroy(gameObject, 0.5f); // Destruir el objeto tras la distracción
         }
+
+        Destroy(gameObject, 0.5f); // Destruir el objeto tras la distracción
     }
 }
