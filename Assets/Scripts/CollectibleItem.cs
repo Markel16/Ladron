@@ -1,22 +1,60 @@
 using UnityEngine;
+using TMPro; // Necesario para manejar TextMeshPro
 
 public class CollectibleItem : MonoBehaviour
 {
-    public AudioClip pickupSound; // Sonido de recolección
+    private bool isInRange = false; // Saber si el jugador está cerca
+    public KeyCode pickUpKey = KeyCode.E; // Tecla para recoger el objeto
+    public GameObject interactMessage; // Referencia al mensaje UI
 
-    private void OnTriggerEnter(Collider other)
+    void Start()
+    {
+        if (interactMessage != null)
+        {
+            interactMessage.SetActive(false); // Ocultar mensaje al inicio
+        }
+    }
+
+    void Update()
+    {
+        // Si el jugador está en rango y presiona la tecla, recoge el objeto
+        if (isInRange && Input.GetKeyDown(pickUpKey))
+        {
+            PickUp();
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            // Reproducir sonido al recoger
-            AudioSource.PlayClipAtPoint(pickupSound, transform.position);
-
-            // Sumar el objeto al contador del jugador
-            GameManager.instance.CollectItem();
-            Debug.Log("¡Objeto recogido!");
-
-            // Destruir el objeto al recogerlo
-            Destroy(gameObject);
+            isInRange = true; // El jugador está en rango
+            if (interactMessage != null)
+            {
+                interactMessage.SetActive(true); // Mostrar mensaje
+            }
         }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isInRange = false; // El jugador salió del rango
+            if (interactMessage != null)
+            {
+                interactMessage.SetActive(false); // Ocultar mensaje
+            }
+        }
+    }
+
+    void PickUp()
+    {
+        Debug.Log("Objeto recogido: " + gameObject.name);
+        if (interactMessage != null)
+        {
+            interactMessage.SetActive(false); // Ocultar mensaje tras recoger
+        }
+        Destroy(gameObject); // Elimina el objeto tras recogerlo
     }
 }
