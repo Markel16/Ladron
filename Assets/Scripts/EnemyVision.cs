@@ -66,6 +66,7 @@ public class EnemyVision : MonoBehaviour
                     {
                         Debug.Log("¡Jugador detectado! Persiguiéndolo...");
                         isChasing = true;
+                        isDistracted = false; // Cancelar la distracción si detecta al jugador
                         agent.speed = chaseSpeed; // Cambia la velocidad al modo persecución
                         agent.SetDestination(player.position);
                         GetComponent<EnemySound>().PlayAlertSound();
@@ -96,6 +97,7 @@ public class EnemyVision : MonoBehaviour
         {
             Debug.Log("El enemigo ha oído un ruido. Investigando...");
             isDistracted = true;
+            agent.speed = patrolSpeed; // Mantener la velocidad de patrulla mientras investiga
             agent.SetDestination(distractionPoint);
 
             // Después de 5 segundos, vuelve a patrullar
