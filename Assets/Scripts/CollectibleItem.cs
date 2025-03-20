@@ -6,6 +6,7 @@ public class CollectibleItem : MonoBehaviour
     private bool isInRange = false; // Saber si el jugador está cerca
     public KeyCode pickUpKey = KeyCode.E; // Tecla para recoger el objeto
     public GameObject interactMessage; // Referencia al mensaje UI
+    public string itemName = "Key"; // Nombre del objeto (puede ser "Key", "Battery", etc.)
 
     void Start()
     {
@@ -50,11 +51,16 @@ public class CollectibleItem : MonoBehaviour
 
     void PickUp()
     {
-        Debug.Log("Objeto recogido: " + gameObject.name);
+        Debug.Log("¡Objeto recogido: " + itemName + "!");
+
+        // Notificar al GameManager sobre la recolección
+        GameManager.instance.PlayerCollectedItem(itemName);
+
         if (interactMessage != null)
         {
             interactMessage.SetActive(false); // Ocultar mensaje tras recoger
         }
+
         Destroy(gameObject); // Elimina el objeto tras recogerlo
     }
 }
