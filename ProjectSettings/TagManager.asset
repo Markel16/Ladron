@@ -8,6 +8,7 @@ TagManager:
   - DistractionZone
   - Distraction
   - Collectible
+  - Key
   layers:
   - Default
   - TransparentFX
