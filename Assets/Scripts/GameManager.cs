@@ -3,28 +3,43 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-    private int collectedItems = 0;
-    public int totalItems = 3; // Cambia esto según la cantidad de objetos en el nivel
+    public static GameManager instance; // Singleton para acceso global
+    private bool hasKey = false; // Variable para saber si el jugador tiene la llave
 
-    private void Awake()
+    void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject); // Mantiene el GameManager en todas las escenas
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
-    public void CollectItem()
+    public void PlayerCollectedItem(string itemName)
     {
-        collectedItems++;
-        Debug.Log("Objetos recogidos: " + collectedItems);
-
-        // Si el jugador ha recogido todos los objetos, activar zona de salida
-        if (collectedItems >= totalItems)
+        if (itemName == "Key")
         {
-            ExitZone.instance.UnlockExit();
+            hasKey = true;
+            Debug.Log("El jugador tiene la llave. Puede avanzar al siguiente nivel.");
         }
+    }
+
+    void Update()
+    {
+        // Si el jugador tiene la llave y presiona "F" en la salida, avanza de nivel
+        if (hasKey && Input.GetKeyDown(KeyCode.F))
+        {
+            LoadNextLevel();
+        }
+    }
+
+    void LoadNextLevel()
+    {
+        Debug.Log("¡Pasando al siguiente nivel!");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
-
