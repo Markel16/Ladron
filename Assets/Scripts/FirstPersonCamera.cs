@@ -7,10 +7,11 @@ public class FirstPersonMovement : MonoBehaviour
     private float currentSpeed; // Velocidad actual
     private CharacterController controller;
     public float mouseSensitivity = 200f;
+    [SerializeField] private CharacterController _characterController;
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        //controller = GetComponent<CharacterController>();
         currentSpeed = walkSpeed; // Empezar con velocidad normal
     }
 
