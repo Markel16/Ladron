@@ -65,6 +65,10 @@ public class EnemyVision : MonoBehaviour
                     if (hit.collider.CompareTag("Player"))
                     {
                         Debug.Log("¡Jugador detectado! Persiguiéndolo...");
+
+                        // 🔴 NUEVO: Mostrar flash rojo en pantalla
+                        FindObjectOfType<DetectionFlashUI>()?.ShowFlash();
+
                         isChasing = true;
                         isDistracted = false; // Cancelar la distracción si detecta al jugador
                         agent.speed = chaseSpeed; // Cambia la velocidad al modo persecución

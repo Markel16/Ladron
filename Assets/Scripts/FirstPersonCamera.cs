@@ -7,32 +7,27 @@ public class FirstPersonMovement : MonoBehaviour
     private float currentSpeed; // Velocidad actual
     private CharacterController controller;
     public float mouseSensitivity = 200f;
-    [SerializeField] private CharacterController _characterController;
 
     void Start()
     {
-        //controller = GetComponent<CharacterController>();
+        controller = GetComponent<CharacterController>();
         currentSpeed = walkSpeed; // Empezar con velocidad normal
     }
 
     void Update()
     {
         // Detectar si el jugador presiona Shift para correr
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            currentSpeed = sprintSpeed; // Duplicar velocidad
-        }
-        else
-        {
-            currentSpeed = walkSpeed; // Volver a velocidad normal
-        }
+        currentSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
 
         // Obtener entrada de movimiento (WASD)
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        // Aplicar movimiento en función de la velocidad actual
+        // Aplicar movimiento
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
-        controller.Move(move * currentSpeed * Time.deltaTime);
+        if (controller != null)
+        {
+            controller.Move(move * currentSpeed * Time.deltaTime);
+        }
     }
 }
