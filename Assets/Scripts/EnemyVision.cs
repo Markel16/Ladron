@@ -1,52 +1,74 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyVision : MonoBehaviour
 {
-    public float visionRange = 10f; // Distancia de visión
-    public float visionAngle = 45f; // Ángulo del cono de visión
-    public Transform player; // Referencia al jugador
-    private NavMeshAgent agent; // Para moverse
-    public Transform[] patrolPoints; // Puntos de patrulla
+    public float visionRange = 10f;
+    public float visionAngle = 45f;
+    public Transform player;
+
+    private NavMeshAgent agent;
+    public Transform[] patrolPoints;
     private int currentPatrolIndex = 0;
+
     private bool isChasing = false;
-    public float patrolSpeed = 2f; // Velocidad cuando patrulla
-    public float chaseSpeed = 5f; // Velocidad cuando persigue al jugador
-    public float chaseTime = 5f; // Tiempo que busca al jugador antes de volver a patrullar
-    private float chaseTimer = 0f; // Contador para la persecución
-    private bool isDistracted = false; // Saber si el enemigo está investigando una distracción
+    private bool isDistracted = false;
+    private float chaseTimer = 0f;
+
+    public float patrolSpeed = 2f;
+    public float chaseSpeed = 5f;
+    public float chaseTime = 5f;
+
+    // ALERTA VISUAL
+    public Image alertImage;
+    private float alertDuration = 1f;
+    private float alertTimer = 0f;
+
+    // 🟢 NUEVO: Referencia directa al script de la UI
+    private DetectionFlashUI flashUI;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = patrolSpeed;
-        PatrolToNextPoint(); // Empezar la patrulla
+        PatrolToNextPoint();
+
+        if (alertImage != null)
+        {
+            alertImage.enabled = false;
+        }
+
+        // 🟢 NUEVO: Buscar el script de la alerta al inicio
+        flashUI = FindObjectOfType<DetectionFlashUI>();
     }
 
     void Update()
     {
-        if (isDistracted) return; // Si está distraído, no patrulla ni persigue
+        if (isDistracted) return;
 
-        if (!isChasing)
+        if (!isChasing && !agent.pathPending && agent.remainingDistance < 0.5f)
         {
-            // Si llega al destino, ir al siguiente punto de patrulla
-            if (!agent.pathPending && agent.remainingDistance < 0.5f)
-            {
-                PatrolToNextPoint();
-            }
+            PatrolToNextPoint();
         }
 
-        DetectPlayer(); // Comprobar si el jugador está en rango
+        DetectPlayer();
+
+        if (alertImage != null && alertImage.enabled)
+        {
+            alertTimer -= Time.deltaTime;
+            if (alertTimer <= 0f)
+            {
+                alertImage.enabled = false;
+            }
+        }
     }
 
     void PatrolToNextPoint()
     {
         if (patrolPoints.Length == 0) return;
 
-        // Mover al siguiente punto de patrulla
         agent.SetDestination(patrolPoints[currentPatrolIndex].position);
-
-        // Cambiar al siguiente punto de la lista
         currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
     }
 
@@ -66,21 +88,29 @@ public class EnemyVision : MonoBehaviour
                     {
                         Debug.Log("¡Jugador detectado! Persiguiéndolo...");
 
-                        // 🔴 NUEVO: Mostrar flash rojo en pantalla
-                        FindObjectOfType<DetectionFlashUI>()?.ShowFlash();
+                        // 🔴 Mostrar flash visual desde el script DetectionFlashUI
+                        if (flashUI != null)
+                        {
+                            flashUI.ShowFlash();
+                        }
+
+                        if (alertImage != null)
+                        {
+                            alertImage.enabled = true;
+                            alertTimer = alertDuration;
+                        }
 
                         isChasing = true;
-                        isDistracted = false; // Cancelar la distracción si detecta al jugador
-                        agent.speed = chaseSpeed; // Cambia la velocidad al modo persecución
+                        isDistracted = false;
+                        agent.speed = chaseSpeed;
                         agent.SetDestination(player.position);
-                        GetComponent<EnemySound>().PlayAlertSound();
-                        chaseTimer = chaseTime; // Reinicia el tiempo de persecución
+                        GetComponent<EnemySound>()?.PlayAlertSound();
+                        chaseTimer = chaseTime;
                     }
                 }
             }
         }
 
-        // Si está persiguiendo pero pierde de vista al jugador
         if (isChasing)
         {
             chaseTimer -= Time.deltaTime;
@@ -88,23 +118,21 @@ public class EnemyVision : MonoBehaviour
             {
                 Debug.Log("Jugador perdido. Volviendo a patrullar.");
                 isChasing = false;
-                agent.speed = patrolSpeed; // Vuelve a la velocidad de patrulla
-                PatrolToNextPoint(); // Reinicia la patrulla
+                agent.speed = patrolSpeed;
+                PatrolToNextPoint();
             }
         }
     }
 
-    // ✅ NUEVO: Métodos para Distracción
     public void Distract(Vector3 distractionPoint)
     {
-        if (!isChasing) // Solo se distrae si no está persiguiendo al jugador
+        if (!isChasing)
         {
             Debug.Log("El enemigo ha oído un ruido. Investigando...");
             isDistracted = true;
-            agent.speed = patrolSpeed; // Mantener la velocidad de patrulla mientras investiga
+            agent.speed = patrolSpeed;
             agent.SetDestination(distractionPoint);
 
-            // Después de 5 segundos, vuelve a patrullar
             Invoke(nameof(ResumePatrol), 5f);
         }
     }
@@ -113,6 +141,6 @@ public class EnemyVision : MonoBehaviour
     {
         Debug.Log("El enemigo deja de estar distraído, vuelve a patrullar.");
         isDistracted = false;
-        PatrolToNextPoint(); // Retomar la patrulla desde el punto más cercano
+        PatrolToNextPoint();
     }
 }

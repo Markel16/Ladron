@@ -5,22 +5,26 @@ public class DetectionFlashUI : MonoBehaviour
 {
     public Image flashImage;
     public float flashDuration = 0.5f;
-
-    void Start()
-    {
-        flashImage.enabled = false;
-    }
+    private float timer;
 
     public void ShowFlash()
     {
-        StopAllCoroutines();
-        StartCoroutine(FlashEffect());
+        if (flashImage != null)
+        {
+            flashImage.enabled = true;
+            timer = flashDuration;
+        }
     }
 
-    System.Collections.IEnumerator FlashEffect()
+    void Update()
     {
-        flashImage.enabled = true;
-        yield return new WaitForSeconds(flashDuration);
-        flashImage.enabled = false;
+        if (flashImage != null && flashImage.enabled)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0f)
+            {
+                flashImage.enabled = false;
+            }
+        }
     }
 }

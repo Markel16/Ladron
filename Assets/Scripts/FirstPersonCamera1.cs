@@ -15,7 +15,7 @@ public class FirstPersonCamera : MonoBehaviour
         if (player != null)
         {
             transform.SetParent(player); // La cámara sigue al jugador
-            transform.localPosition = new Vector3(0, 1.8f, 0); // Altura de la cabeza
+            transform.localPosition = new Vector3(0, 0, 0); // Altura de la cabeza
         }
         else
         {
