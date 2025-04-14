@@ -1,61 +1,71 @@
-using UnityEngine;
-using TMPro; // Para manejar TextMeshPro
+Ôªøusing UnityEngine;
+using TMPro;
 
 public class ThrowObject : MonoBehaviour
 {
-    public GameObject distractionPrefab; // Prefab del objeto que se lanza
-    public Transform throwPoint; // Lugar desde donde se lanza
-    public float throwForce = 10f; // Fuerza del lanzamiento
-    public GameObject throwMessage; // Referencia al mensaje de UI
+    public GameObject distractionPrefab;
+    public Transform throwPoint;
+    public float minForce = 5f;
+    public float maxForce = 20f;
+    public float chargeRate = 10f; // velocidad de carga por segundo
+    public float maxVelocity = 15f;
 
-    private bool canThrow = true; // Para controlar si el jugador puede lanzar
+    public GameObject throwMessage;
+
+    private bool canThrow = true;
+    private float currentForce;
 
     void Start()
     {
+        currentForce = minForce;
+
         if (throwMessage != null)
-        {
-            throwMessage.SetActive(false); // Ocultar mensaje al inicio
-        }
+            throwMessage.SetActive(false);
     }
 
     void Update()
     {
-        // Mostrar el mensaje cuando el jugador pueda lanzar una distracciÛn
         if (canThrow && throwMessage != null)
-        {
             throwMessage.SetActive(true);
-        }
         else if (throwMessage != null)
-        {
             throwMessage.SetActive(false);
+
+        // üîÅ Cargar fuerza mientras mantienes presionada G
+        if (canThrow && Input.GetKey(KeyCode.G))
+        {
+            currentForce += chargeRate * Time.deltaTime;
+            currentForce = Mathf.Clamp(currentForce, minForce, maxForce);
         }
 
-        // Si el jugador presiona G y puede lanzar
-        if (canThrow && Input.GetKeyDown(KeyCode.G))
+        // üöÄ Lanzar cuando sueltas la tecla G
+        if (canThrow && Input.GetKeyUp(KeyCode.G))
         {
-            ThrowDistraction();
+            ThrowDistraction(currentForce);
+            currentForce = minForce; // reiniciar fuerza
         }
     }
 
-    void ThrowDistraction()
+    void ThrowDistraction(float force)
     {
         if (distractionPrefab != null)
         {
             GameObject distraction = Instantiate(distractionPrefab, throwPoint.position, Quaternion.identity);
             Rigidbody rb = distraction.GetComponent<Rigidbody>();
+
             if (rb != null)
             {
-                rb.AddForce(Camera.main.transform.forward * throwForce, ForceMode.Impulse);
+                rb.AddForce(Camera.main.transform.forward * force, ForceMode.Impulse);
+
+                if (rb.linearVelocity.magnitude > maxVelocity)
+                    rb.linearVelocity = rb.linearVelocity.normalized * maxVelocity;
             }
         }
 
-        canThrow = false; // Evitar que el jugador lance sin lÌmites
-        if (throwMessage != null)
-        {
-            throwMessage.SetActive(false); // Ocultar el mensaje despuÈs de lanzar
-        }
+        canThrow = false;
 
-        // Opcional: Agregar un tiempo de espera antes de volver a lanzar
+        if (throwMessage != null)
+            throwMessage.SetActive(false);
+
         Invoke(nameof(ResetThrow), 3f);
     }
 
