@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: 9fc0d4010bbf28b4594072e72b8655ab
-DefaultImporter:
+guid: 9d8544ae12bcda24fac3c35f96880fc7
+NativeFormatImporter:
   externalObjects: {}
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -10,5 +11,5 @@ AssetOrigin:
   productId: 162383
   packageName: Carton of Milk 4K PBR
   packageVersion: 1.0
-  assetPath: Assets/Scenes/SampleScene.unity
+  assetPath: Assets/Carton of Milk 4K PBR/Scenes/SampleScene/LightingData.asset
   uploadId: 351023
