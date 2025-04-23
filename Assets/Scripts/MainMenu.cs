@@ -27,14 +27,27 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    // ✅ Adaptado: Reanuda el juego en la misma escena
+    public void PlayGame()
+    {
+        mainMenuPanel.SetActive(false);
+        optionsPanel.SetActive(false);
+        exitConfirmPanel.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Time.timeScale = 1f;
+        isPaused = false;
+    }
+
     public void ShowMainMenu()
     {
         mainMenuPanel.SetActive(true);
         optionsPanel.SetActive(false);
-        exitConfirmPanel.SetActive(false); // Ocultar la confirmación de salida
-        Cursor.lockState = CursorLockMode.None; // Desbloquear cursor
-        Cursor.visible = true; // Hacer visible el cursor
-        Time.timeScale = 0f; // Pausar el juego
+        exitConfirmPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 0f;
         isPaused = true;
     }
 
@@ -42,15 +55,15 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuPanel.SetActive(false);
         optionsPanel.SetActive(true);
-        Cursor.lockState = CursorLockMode.None; // Asegurar que el cursor siga desbloqueado
-        Cursor.visible = true; // Hacerlo visible
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void CloseOptions()
     {
         optionsPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
-        Cursor.lockState = CursorLockMode.None; // Mantener el cursor desbloqueado en el menú
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
@@ -59,30 +72,27 @@ public class MainMenu : MonoBehaviour
         mainMenuPanel.SetActive(false);
         optionsPanel.SetActive(false);
         exitConfirmPanel.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked; // Bloquear cursor
-        Cursor.visible = false; // Ocultar cursor
-        Time.timeScale = 1f; // Reanudar el juego
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Time.timeScale = 1f;
         isPaused = false;
     }
 
-    // 📌 Función para mostrar la confirmación de salida
     public void ShowExitConfirmation()
     {
-        mainMenuPanel.SetActive(false); // Ocultar el menú principal
-        exitConfirmPanel.SetActive(true); // Mostrar el panel de confirmación
+        mainMenuPanel.SetActive(false);
+        exitConfirmPanel.SetActive(true);
     }
 
-    // 📌 Función para cancelar la salida y volver al menú principal
     public void CancelExit()
     {
-        exitConfirmPanel.SetActive(false); // Ocultar el panel de confirmación
-        mainMenuPanel.SetActive(true); // Volver al menú principal
+        exitConfirmPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
     }
 
-    // 📌 Función para cerrar el juego
     public void QuitGame()
     {
         Debug.Log("Saliendo del juego...");
-        Application.Quit(); // Solo funciona en la versión compilada
+        Application.Quit();
     }
 }
