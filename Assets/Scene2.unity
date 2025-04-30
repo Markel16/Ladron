@@ -5465,6 +5465,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1404698273886031146, guid: 4c4ec812a34e0d2409c814b92915920d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 008f8d3f6ff7b104a826a713797d5efb, type: 2}
     - target: {fileID: 1671035951166551526, guid: 4c4ec812a34e0d2409c814b92915920d, type: 3}
       propertyPath: m_Name
       value: ExitZone
