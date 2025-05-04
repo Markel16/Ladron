@@ -1,33 +1,45 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FirstPersonMovement : MonoBehaviour
 {
-    public float walkSpeed = 3f; // Velocidad normal
-    public float sprintSpeed = 6f; // Velocidad al correr
-    private float currentSpeed; // Velocidad actual
+    public float walkSpeed = 3f;
+    public float sprintSpeed = 6f;
+    private float currentSpeed;
     private CharacterController controller;
     public float mouseSensitivity = 200f;
+
+    public float pushForce = 5f;  // Fuerza con la que empuja objetos
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        currentSpeed = walkSpeed; // Empezar con velocidad normal
+        currentSpeed = walkSpeed;
     }
 
     void Update()
     {
-        // Detectar si el jugador presiona Shift para correr
         currentSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
 
-        // Obtener entrada de movimiento (WASD)
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        // Aplicar movimiento
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
         if (controller != null)
         {
             controller.Move(move * currentSpeed * Time.deltaTime);
         }
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody body = hit.collider.attachedRigidbody;
+
+        // empujar el objeto con el tag añadido
+        if (body != null && body.gameObject.layer == LayerMask.NameToLayer("Empujar"))
+        {
+            Vector3 force = hit.moveDirection * pushForce;
+            body.AddForce(force, ForceMode.Impulse);
+        }
+    }
 }
+
