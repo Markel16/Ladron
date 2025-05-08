@@ -27,7 +27,7 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    // ✅ Adaptado: Reanuda el juego en la misma escena
+    // Adaptado: Reanuda el juego en la misma escena
     public void PlayGame()
     {
         mainMenuPanel.SetActive(false);

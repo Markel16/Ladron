@@ -15,11 +15,13 @@ public class OptionsMenu : MonoBehaviour
         volumeSlider.value = PlayerPrefs.GetFloat("Volume", 1f);
         brightnessSlider.value = PlayerPrefs.GetFloat("Brightness", 1f);
 
-        ApplySettings();
+        //ApplySettings();
     }
 
     public void ApplySettings()
     {
+        Debug.Log(mouseSensitivitySlider);
+        Debug.Log(playerMovement.gameObject.name);
         // Ajustar sensibilidad del ratón
         playerMovement.mouseSensitivity = mouseSensitivitySlider.value; // Usamos la referencia correcta
         PlayerPrefs.SetFloat("MouseSensitivity", mouseSensitivitySlider.value);
