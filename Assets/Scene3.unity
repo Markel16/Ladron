@@ -395,7 +395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6048435994706122047, guid: 5c28c7769b8056b47980f3241a35686f, type: 3}
       propertyPath: m_TagString
-      value: Collectible
+      value: Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1926,6 +1926,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6574311210285152857, guid: d5fc031f75acfe344a2f114803394394, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5812755263088050748, guid: d5fc031f75acfe344a2f114803394394, type: 3}
@@ -2524,6 +2528,10 @@ PrefabInstance:
     - target: {fileID: 6574311210285152857, guid: d5fc031f75acfe344a2f114803394394, type: 3}
       propertyPath: m_Name
       value: Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6574311210285152857, guid: d5fc031f75acfe344a2f114803394394, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -4714,7 +4722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6048435994706122047, guid: 5c28c7769b8056b47980f3241a35686f, type: 3}
       propertyPath: m_TagString
-      value: Collectible
+      value: Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7396,7 +7404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6048435994706122047, guid: 5c28c7769b8056b47980f3241a35686f, type: 3}
       propertyPath: m_TagString
-      value: Collectible
+      value: Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7982,6 +7990,10 @@ PrefabInstance:
     - target: {fileID: 1302726767384959601, guid: 25f4b97a22d462749b985c0806c854a4, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317094677096306693, guid: 25f4b97a22d462749b985c0806c854a4, type: 3}
+      propertyPath: totalKeysRequired
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7960376987977298845, guid: 25f4b97a22d462749b985c0806c854a4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11619,6 +11631,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8104089915235532977, guid: d7614d5ea5d75794189379c951f9f90e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8177329597285751333, guid: d7614d5ea5d75794189379c951f9f90e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -13504,7 +13520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6048435994706122047, guid: 5c28c7769b8056b47980f3241a35686f, type: 3}
       propertyPath: m_TagString
-      value: Collectible
+      value: Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17880,7 +17896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6048435994706122047, guid: 5c28c7769b8056b47980f3241a35686f, type: 3}
       propertyPath: m_TagString
-      value: Collectible
+      value: Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18928,7 +18944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6048435994706122047, guid: 5c28c7769b8056b47980f3241a35686f, type: 3}
       propertyPath: m_TagString
-      value: Collectible
+      value: Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

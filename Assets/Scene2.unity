@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: lampSquareFloor
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b9ced3952f24fbd4f8e575122abd5bc6, type: 3}
+      propertyPath: m_TagString
+      value: Key
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2870,6 +2874,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7317094677096306693, guid: 25f4b97a22d462749b985c0806c854a4, type: 3}
+      propertyPath: totalKeysRequired
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7960376987977298845, guid: 25f4b97a22d462749b985c0806c854a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.5567684
@@ -4645,6 +4653,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bear
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3ca41a3f51084443a8ab60d6faeb828, type: 3}
+      propertyPath: m_TagString
+      value: Key
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5444,6 +5456,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d909e5899506df5458952bd82a6b0338, type: 3}
       propertyPath: m_Name
       value: radio
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d909e5899506df5458952bd82a6b0338, type: 3}
+      propertyPath: m_TagString
+      value: Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10134,6 +10150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: laptop
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b835798d14b47ad44b8143f26bf59fb5, type: 3}
+      propertyPath: m_TagString
+      value: Key
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11917,6 +11937,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: plantSmall3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1c2c47bcd684e074ca9a126401b2c25d, type: 3}
+      propertyPath: m_TagString
+      value: Key
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12914,6 +12938,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2af794ce86206504c99db578f6e99eba, type: 3}
       propertyPath: m_Name
       value: computerScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2af794ce86206504c99db578f6e99eba, type: 3}
+      propertyPath: m_TagString
+      value: Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15403,6 +15431,10 @@ PrefabInstance:
     - target: {fileID: 8104089915235532977, guid: d7614d5ea5d75794189379c951f9f90e, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104089915235532977, guid: d7614d5ea5d75794189379c951f9f90e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8107813905711001823, guid: d7614d5ea5d75794189379c951f9f90e, type: 3}
       propertyPath: m_LocalScale.x
@@ -18208,7 +18240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6048435994706122047, guid: 5c28c7769b8056b47980f3241a35686f, type: 3}
       propertyPath: m_TagString
-      value: Collectible
+      value: Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19341,7 +19373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6048435994706122047, guid: 5c28c7769b8056b47980f3241a35686f, type: 3}
       propertyPath: m_TagString
-      value: Collectible
+      value: Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19540,6 +19572,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 1c2c47bcd684e074ca9a126401b2c25d, type: 3}
       propertyPath: m_Name
       value: plantSmall3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1c2c47bcd684e074ca9a126401b2c25d, type: 3}
+      propertyPath: m_TagString
+      value: Key
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
