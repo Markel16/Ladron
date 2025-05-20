@@ -10,10 +10,6 @@ public class FirstPersonMovement : MonoBehaviour
 
     public float pushForce = 5f;  // Fuerza con la que empuja objetos
 
-    // 🔽 Gravedad manual
-    public float gravity = -9.81f;
-    public float verticalVelocity;
-
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -28,19 +24,6 @@ public class FirstPersonMovement : MonoBehaviour
         float moveZ = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
-
-        //  Aplicar la gravedad manual
-        if (controller.isGrounded && verticalVelocity < 0)
-        {
-            verticalVelocity = -2f; // para que le personaje este pegado al suelo
-        }
-        else
-        {
-            verticalVelocity += gravity * Time.deltaTime;
-        }
-
-        move.y = verticalVelocity; 
-
         if (controller != null)
         {
             controller.Move(move * currentSpeed * Time.deltaTime);
@@ -51,12 +34,13 @@ public class FirstPersonMovement : MonoBehaviour
     {
         Rigidbody body = hit.collider.attachedRigidbody;
 
-        // objetos que solo tiene que empujar
-        if (body != null && body.gameObject.layer == LayerMask.NameToLayer("Empujar"))
+        // Usar tag "Empujar" en lugar de layer
+        if (body != null && body.CompareTag("Empujar"))
         {
             Vector3 force = hit.moveDirection * pushForce;
             body.AddForce(force, ForceMode.Impulse);
         }
     }
 }
+
 
