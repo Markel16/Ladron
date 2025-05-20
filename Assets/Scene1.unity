@@ -80812,6 +80812,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+    - target: {fileID: 5301347851633913651, guid: 96ea3c3a3e58c5f49b3de843b88e5c53, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.322
+      objectReference: {fileID: 0}
     - target: {fileID: 6593656938094555406, guid: 96ea3c3a3e58c5f49b3de843b88e5c53, type: 3}
       propertyPath: m_IsTrigger
       value: 0

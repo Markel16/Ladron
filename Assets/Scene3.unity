@@ -2130,7 +2130,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256484266}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7bdb2daa168a0b54fafa7a64e5fdda39, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2157,7 +2157,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256484266}
   serializedVersion: 4
-  m_Mass: 10
+  m_Mass: 25
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -11124,7 +11124,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093277573}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7bdb2daa168a0b54fafa7a64e5fdda39, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -11151,7 +11151,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093277573}
   serializedVersion: 4
-  m_Mass: 10
+  m_Mass: 20
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -14707,7 +14707,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341126756}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 7bdb2daa168a0b54fafa7a64e5fdda39, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -17320,7 +17320,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 5301347851633913651, guid: 96ea3c3a3e58c5f49b3de843b88e5c53, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.184
+      value: 0.372
       objectReference: {fileID: 0}
     - target: {fileID: 6830678696428633545, guid: 96ea3c3a3e58c5f49b3de843b88e5c53, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17361,6 +17361,10 @@ PrefabInstance:
     - target: {fileID: 6830678696428633545, guid: 96ea3c3a3e58c5f49b3de843b88e5c53, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7210960626800181219, guid: 96ea3c3a3e58c5f49b3de843b88e5c53, type: 3}
+      propertyPath: maxForce
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7210960626800181219, guid: 96ea3c3a3e58c5f49b3de843b88e5c53, type: 3}
       propertyPath: throwMessage
