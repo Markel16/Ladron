@@ -1,21 +1,24 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class FirstPersonCamera : MonoBehaviour
 {
-    public Transform player; // Referencia al jugador
+    public Transform player; 
     public float mouseSensitivity = 200f;
+
+    [Header("LÃ­mites de cÃ¡mara")]
+    public float minVerticalAngle = -45f; // LÃ­mite hacia abajo
+    public float maxVerticalAngle = 60f;  // LÃ­mite hacia arriba
 
     private float xRotation = 0f;
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; // Bloquear el cursor en el centro
+        Cursor.lockState = CursorLockMode.Locked;
 
-        // Asegurar que la cámara está correctamente en la cabeza del jugador
         if (player != null)
         {
-            transform.SetParent(player); // La cámara sigue al jugador
-            transform.localPosition = new Vector3(0, 0, 0); // Altura de la cabeza
+            transform.SetParent(player);
+            transform.localPosition = Vector3.zero;
         }
         else
         {
@@ -29,9 +32,10 @@ public class FirstPersonCamera : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Limitar la rotación vertical
+        xRotation = Mathf.Clamp(xRotation, minVerticalAngle, maxVerticalAngle); 
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         player.Rotate(Vector3.up * mouseX);
     }
 }
+
