@@ -10,14 +10,13 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.None; // Desbloquear cursor
-        Cursor.visible = true; // Hacer visible el cursor
-        ShowMainMenu(); // Asegura que solo el menú principal esté visible al inicio
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        ShowMainMenu();
     }
 
     void Update()
     {
-        // Si presionamos ESC, mostramos el menú
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!isPaused)
@@ -27,7 +26,6 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    // Adaptado: Reanuda el juego en la misma escena
     public void PlayGame()
     {
         mainMenuPanel.SetActive(false);
@@ -95,4 +93,11 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Saliendo del juego...");
         Application.Quit();
     }
+
+    //Volver al menú principal desde otras escenas (como Créditos)
+    public void VolverAlMenu()
+    {
+        SceneManager.LoadScene("MainMenu"); // Asegúrate de que la escena se llama así en el Build Settings
+    }
 }
+
