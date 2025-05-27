@@ -111756,6 +111756,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 630764420}
+    - target: {fileID: 2693096323116563880, guid: d7614d5ea5d75794189379c951f9f90e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToLevelMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 2763243934292258128, guid: d7614d5ea5d75794189379c951f9f90e, type: 3}
       propertyPath: m_text
       value: 'BRILLO
