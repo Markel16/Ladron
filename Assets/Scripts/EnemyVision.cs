@@ -20,12 +20,10 @@ public class EnemyVision : MonoBehaviour
     public float chaseSpeed = 5f;
     public float chaseTime = 5f;
 
-    // ALERTA VISUAL
     public Image alertImage;
     private float alertDuration = 1f;
     private float alertTimer = 0f;
 
-    // 🟢 NUEVO: Referencia directa al script de la UI
     private DetectionFlashUI flashUI;
 
     void Start()
@@ -39,7 +37,6 @@ public class EnemyVision : MonoBehaviour
             alertImage.enabled = false;
         }
 
-        // 🟢 NUEVO: Buscar el script de la alerta al inicio
         flashUI = FindObjectOfType<DetectionFlashUI>();
     }
 
@@ -88,7 +85,6 @@ public class EnemyVision : MonoBehaviour
                     {
                         Debug.Log("¡Jugador detectado! Persiguiéndolo...");
 
-                        // 🔴 Mostrar flash visual desde el script DetectionFlashUI
                         if (flashUI != null)
                         {
                             flashUI.ShowFlash();
@@ -99,6 +95,9 @@ public class EnemyVision : MonoBehaviour
                             alertImage.enabled = true;
                             alertTimer = alertDuration;
                         }
+
+                        // 🔴 Mostrar Game Over Panel al detectar al jugador
+                        GameOverManager.instance?.ShowGameOverPanel();
 
                         isChasing = true;
                         isDistracted = false;
@@ -132,7 +131,6 @@ public class EnemyVision : MonoBehaviour
             isDistracted = true;
             agent.speed = patrolSpeed;
             agent.SetDestination(distractionPoint);
-
             Invoke(nameof(ResumePatrol), 5f);
         }
     }

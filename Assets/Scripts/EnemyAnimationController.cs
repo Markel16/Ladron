@@ -18,13 +18,25 @@ public class EnemyAnimationController : MonoBehaviour
 
     void Update()
     {
-        if (agent.velocity.magnitude > 0.1f)
+        float speed = agent.velocity.magnitude;
+
+        
+        if (speed > 0.1f && speed < 3f)
         {
-            animator.SetBool("isWalking", true);  //Activar caminar
+            animator.SetBool("isWalking", true);
+            animator.SetBool("isSprinting", false);
         }
+        
+        else if (speed >= 3f)
+        {
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isSprinting", true);
+        }
+        
         else
         {
-            animator.SetBool("isWalking", false); //Parar animación
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isSprinting", false);
         }
     }
 }

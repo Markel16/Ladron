@@ -6,22 +6,29 @@ public class GameOverManager : MonoBehaviour
     public static GameOverManager instance;
     public GameObject gameOverPanel;
 
+    [SerializeField] private string menuSceneName = "Scene1Menu"; // depende de la escena en la que este el jugador
+
     private void Awake()
     {
         instance = this;
     }
 
-    public void ShowGameOver()
+    public void ShowGameOverPanel()
     {
+        Time.timeScale = 0f;
         gameOverPanel.SetActive(true);
-        Cursor.lockState = CursorLockMode.None; // Mostrar cursor
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        Time.timeScale = 0f; // Pausar el juego
+
+        // Espera 2 segundos y luego va al menú del nivel
+        Invoke(nameof(ReturnToLevelMenu), 2f);
     }
 
-    public void ReturnToMenu()
+    void ReturnToLevelMenu()
     {
-        Time.timeScale = 1f; // Restaurar el tiempo del juego
-        SceneManager.LoadScene("MainMenu"); // Asegúrate de que el nombre coincide con el de tu menú principal
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(menuSceneName);
     }
 }
+
+
